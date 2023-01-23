@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mongodb:
+    image: 'mongo'
+    container_name: 'mongodb'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=AAAD_DATABASE
+    volumes:
+      - ./mongo-volume:/data/db
+    ports:
+      - '27017-27019:27017-27019'
+    restart: unless-stopped
+  app:
+    build: .
+    container_name: 'app'
+    ports:
+      - '8080:8080'
